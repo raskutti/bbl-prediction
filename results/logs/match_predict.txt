@@ -1,0 +1,24 @@
+Elo frozen config K=8, regress=0.0; stack b=0.96 (1=raw Elo), home logit c=0.20
+Elo ratings entering 2026/27: {'Perth Scorchers': 1582, 'Sydney Sixers': 1573, 'Hobart Hurricanes': 1520, 'Melbourne Stars': 1483, 'Brisbane Heat': 1479, 'Adelaide Strikers': 1475, 'Sydney Thunder': 1457, 'Melbourne Renegades': 1431}
+BT config half-life=2.0y ridge=4.0; home logit=0.36
+BT strengths: {'Perth Scorchers': np.float64(0.27), 'Sydney Sixers': np.float64(0.26), 'Hobart Hurricanes': np.float64(0.11), 'Melbourne Stars': np.float64(-0.05), 'Brisbane Heat': np.float64(-0.07), 'Adelaide Strikers': np.float64(-0.13), 'Sydney Thunder': np.float64(-0.16), 'Melbourne Renegades': np.float64(-0.23)}
+
+P(Renegades win)  [Renegades at home vs Sydney team, MCG = Melbourne]:
+  home_diff=+1: Elo-stack 0.357 | BT 0.467 | ensemble 0.412
+  home_diff=+0: Elo-stack 0.313 | BT 0.378 | ensemble 0.346
+BT bootstrap 90% interval (home=+1): [0.378 0.555] sd 0.054
+chase logit effect c=0.2: pre-toss p = 0.413 vs ignoring chase 0.412
+chase logit effect c=0.47: pre-toss p = 0.417 vs ignoring chase 0.412
+Melbourne Renegades: 7/19 wins since 2024/25;  last season: 3 / 9
+Sydney Sixers: 13/22 wins since 2024/25;  last season: 7 / 12
+H2H all-time Renegades wins: 4 of 19
+
+P(Renegades win) when only a fraction of the rating gap is kept (roster-churn sensitivity):
+  keep 100% of gap | home   : Elo 0.357  BT 0.467  ensemble 0.412
+  keep 100% of gap | neutral: Elo 0.313  BT 0.378  ensemble 0.346
+  keep  75% of gap | home   : Elo 0.403  BT 0.498  ensemble 0.451
+  keep  75% of gap | neutral: Elo 0.357  BT 0.408  ensemble 0.382
+  keep  50% of gap | home   : Elo 0.452  BT 0.529  ensemble 0.490
+  keep  50% of gap | neutral: Elo 0.403  BT 0.438  ensemble 0.421
+  keep  25% of gap | home   : Elo 0.501  BT 0.560  ensemble 0.530
+  keep  25% of gap | neutral: Elo 0.451  BT 0.469  ensemble 0.460

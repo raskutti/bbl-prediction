@@ -1,0 +1,40 @@
+coefs (per runs/over deviation): batter 0.113, bowler 0.078
+venue+inn base means (MCG, inn 1): {'Melbourne Renegades': np.float64(43.09), 'Sydney Sixers': np.float64(43.09)} alpha 0.043
+
+Batter ratings:
+         player  PP balls (career BBL)  rating vs league (runs/over)
+      CP Jewell                    568                          0.33
+        J Brown                    547                          0.89
+J Fraser-McGurk                    295                          0.07
+      JA Davies                      0                          0.00
+    JM Bairstow                      0                          0.00
+    JR Philippe                   1155                          0.17
+      SPD Smith                    280                          1.57
+     TL Seifert                    176                          0.68
+
+Bowler ratings:
+           player  PP balls (career BBL)  rating vs league (runs/over)
+        B Doggett                    414                          0.57
+     BJ Dwarshuis                    938                         -0.23
+        F O'Neill                    132                         -0.30
+        J Edwards                    240                         -0.15
+   JP Behrendorff                   1608                         -1.08
+Mustafizur Rahman                      0                          0.00
+        SA Abbott                    864                         -0.27
+     W Sutherland                    342                          1.04
+
+Scenario powerplay means (runs).  adjust = exp(cb*batter_feat + cw*opp_bowler_feat)
+  Renegades bat first  bat=core              opp bowl=abbott_edw_dwar  adj x1.038 -> mean 44.7 median 44 [5%:27, 95%:65]
+  Renegades bat first  bat=core              opp bowl=with_oneill      adj x1.036 -> mean 44.6 median 44 [5%:27, 95%:65]
+  Renegades bat first  bat=plus_bairstow     opp bowl=abbott_edw_dwar  adj x1.019 -> mean 43.9 median 43 [5%:27, 95%:64]
+  Renegades bat first  bat=plus_bairstow     opp bowl=with_oneill      adj x1.017 -> mean 43.8 median 43 [5%:27, 95%:64]
+  Renegades bat first  bat=plus_jewell       opp bowl=abbott_edw_dwar  adj x1.032 -> mean 44.5 median 44 [5%:27, 95%:64]
+  Renegades bat first  bat=plus_jewell       opp bowl=with_oneill      adj x1.030 -> mean 44.4 median 44 [5%:27, 95%:64]
+  Sixers bat first     bat=philippe_seifert  opp bowl=behr_suth_dogg   adj x1.064 -> mean 45.8 median 45 [5%:28, 95%:66]
+  Sixers bat first     bat=philippe_seifert  opp bowl=with_mustafizur  adj x1.048 -> mean 45.2 median 44 [5%:28, 95%:65]
+  Sixers bat first     bat=plus_davies       opp bowl=behr_suth_dogg   adj x1.047 -> mean 45.1 median 44 [5%:28, 95%:65]
+  Sixers bat first     bat=plus_davies       opp bowl=with_mustafizur  adj x1.032 -> mean 44.5 median 44 [5%:27, 95%:64]
+  Sixers bat first     bat=with_smith        opp bowl=behr_suth_dogg   adj x1.111 -> mean 47.9 median 47 [5%:30, 95%:69]
+  Sixers bat first     bat=with_smith        opp bowl=with_mustafizur  adj x1.094 -> mean 47.2 median 46 [5%:29, 95%:68]
+
+Average over scenarios (excluding Smith): {'Renegades bat first': np.float64(44.3), 'Sixers bat first': np.float64(45.1)}

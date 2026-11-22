@@ -1,0 +1,18 @@
+{
+  "p_renegades_win_home": 0.412,
+  "p_renegades_win_neutral": 0.346,
+  "bt_bootstrap_90": [
+    0.378,
+    0.555
+  ],
+  "churn_sensitivity": {
+    "keep1.00_home": 0.412,
+    "keep1.00_neutral": 0.346,
+    "keep0.75_home": 0.451,
+    "keep0.75_neutral": 0.382,
+    "keep0.50_home": 0.49,
+    "keep0.50_neutral": 0.421,
+    "keep0.25_home": 0.53,
+    "keep0.25_neutral": 0.46
+  }
+}

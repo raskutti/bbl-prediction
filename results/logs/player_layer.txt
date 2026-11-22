@@ -1,0 +1,5 @@
+n innings 950; corr(actual/base_mu, batter feat) = 0.200; vs bowler feat = 0.093
+base (venue+inn)   logscore -3.8765  vs base +0.0000 [+0.0000,+0.0000]   mean coefs 
++batter            logscore -3.8569  vs base +0.0196 [+0.0058,+0.0340]   mean coefs [0.114]
++bowler            logscore -3.8729  vs base +0.0036 [-0.0023,+0.0099]   mean coefs [0.082]
++both              logscore -3.8535  vs base +0.0230 [+0.0075,+0.0385]   mean coefs [0.113 0.078]

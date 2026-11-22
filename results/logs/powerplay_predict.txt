@@ -1,0 +1,20 @@
+OOS log score: A(hl=inf) -3.8770 | B(hl=1) -3.8982 | 50/50 mixture -3.8801 | league_NB -3.8851
+venues with own effect: 14 | MCG included: True
+Renegades_bat_first: mean A 44.00 (alpha 0.041) | B 41.31
+Sixers_bat_first: mean A 43.94 (alpha 0.041) | B 39.24
+
+Final mixture distributions:
+        Renegades_bat_first  Sixers_bat_first
+mean                  42.66             41.59
+sd                    10.92             10.88
+mode                  40.00             39.00
+p5                    26.00             25.00
+p25                   35.00             34.00
+median                42.00             41.00
+p75                   50.00             48.00
+p95                   62.00             61.00
+sensitivity team lam=100: Renegades mean 43.83, Sixers mean 43.76
+sensitivity team lam=300: Renegades mean 43.87, Sixers mean 43.81
+
+Model A multiplicative effects (exp(beta)): innings2 1.023 | MCG 0.976 | bat Ren 1.018 Six 0.976 | bowl Ren 1.017 Six 0.976
+alpha(A) = 0.041  => sd at mean 46 ~ 11.6
