@@ -1,3 +1,9 @@
+"""Is the league-wide powerplay scoring level persistent?
+
+Checks season-to-season autocorrelation and out-of-sample score by time-decay half-life. This motivates
+the all-history / one-year-half-life mixture used in `powerplay_predict.py`.
+"""
+
 import io, contextlib, numpy as np, pandas as pd
 
 with contextlib.redirect_stdout(io.StringIO()):

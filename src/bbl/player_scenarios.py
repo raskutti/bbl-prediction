@@ -1,5 +1,5 @@
 """Apply the validated player-rating covariates to scenario powerplay line-ups for 1 Jan 2027 (MCG, innings 1).
-Base = venue+innings NB (mixture of hl=inf and hl=1, as step 3). Player ratings from ALL data to 2025/26 (K=60).
+Base = venue+innings NB (mixture of hl=inf and hl=1, as in powerplay_predict). Player ratings from ALL data to 2025/26 (K=60).
 Unseen players (no BBL powerplay history) get 0 adjustment = league mean."""
 
 import io, contextlib, numpy as np, pandas as pd

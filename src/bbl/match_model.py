@@ -1,4 +1,4 @@
-"""Step 2: match-result model. Causal (pre-match) prediction series for many configs; nested config selection;
+"""Match-result model: Elo and Bradley-Terry backtest. Causal (pre-match) prediction series for many configs; nested config selection;
 season-by-season rolling-origin evaluation."""
 
 import numpy as np, pandas as pd, itertools, json

@@ -1,6 +1,6 @@
 """Parse Cricsheet BBL ball-by-ball JSON into tidy tables.
 
-Usage: python load_cricsheet.py data/bbl_json      (folder of .json files, or a .zip)
+Usage: python -m bbl.load_cricsheet data/raw/bbl_json.zip   (a .zip, or a folder of .json files)
 Writes data/matches.csv, data/innings.csv, data/balls.csv.gz
 Download: https://cricsheet.org/downloads/bbl_json.zip
 """

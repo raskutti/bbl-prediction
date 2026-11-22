@@ -1,3 +1,5 @@
+"""Shared helpers: data loading, full-match filter, home-city flags and log loss."""
+
 import numpy as np, pandas as pd
 from bbl.config import *
 

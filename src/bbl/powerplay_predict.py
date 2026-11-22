@@ -1,3 +1,9 @@
+"""Team-level powerplay distributions for the fixture (before the player layer).
+
+Fits the venue+team NB on all data, mixes the all-history and one-year-half-life fits 50/50 and writes
+the probability mass functions and chart to results/.
+"""
+
 import io, contextlib, numpy as np, pandas as pd
 
 with contextlib.redirect_stdout(io.StringIO()):

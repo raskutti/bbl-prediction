@@ -1,4 +1,4 @@
-"""Step 3: powerplay-runs distributions. NB2 regression with ridge-shrunk team/venue effects and time decay.
+"""Powerplay-runs model: NB2 regression with ridge-shrunk team/venue effects and time decay.
 Rolling-origin: for each test season, fit on earlier seasons only (pre-season, as in deployment)."""
 
 import numpy as np, pandas as pd, itertools

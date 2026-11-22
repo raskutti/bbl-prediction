@@ -1,7 +1,7 @@
-"""Step 4: do player-level ratings add out-of-sample powerplay information beyond the team/venue NB model?
+"""Player layer: do player-level ratings add out-of-sample powerplay information beyond the team/venue NB model?
 Causal player ratings (empirical-Bayes shrunk PP runs per legal ball, seasons < s only), averaged over the
 batters who faced PP balls (and bowlers who bowled PP balls) in each innings = 'XI known' (post-announcement) setting.
-Added as covariates on top of the step-3 venue+innings NB mean (offset), coefficients by leave-one-season-out CV.
+Added as covariates on top of the venue+innings NB mean (offset), coefficients by leave-one-season-out CV.
 """
 
 import io, contextlib, numpy as np, pandas as pd
@@ -47,7 +47,7 @@ def feat(s, r):
     return fb * 6, fw * 6  # scale to 'runs per over' deviations
 
 
-# base model: nested pick of NB+venue+inn per season (same as step 3)
+# base model: nested pick of NB+venue+inn per season (same selection as powerplay_model)
 base_pick = dict(picks["NB+venue+inn"])
 lp0, X1, X2, Y, MU, AL, SEAS = [], [], [], [], [], [], []
 for s in ev:

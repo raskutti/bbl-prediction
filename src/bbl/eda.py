@@ -1,4 +1,8 @@
-"""EDA + Elo baseline with rolling-origin evaluation. Run after load_cricsheet.py."""
+"""Exploratory summary (powerplay dispersion, MCG and chase effects) and a simple Elo baseline.
+
+Run after `bbl.load_cricsheet`. The Elo grid here is tuned on the data it scores, so it is optimistic;
+the honest nested backtest is in `match_model.py`.
+"""
 
 import numpy as np, pandas as pd
 
