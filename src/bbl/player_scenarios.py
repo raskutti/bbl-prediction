@@ -79,34 +79,42 @@ print(
     round(alpha, 3),
 )
 # ----------------------------------------------------------------------------------------------
-# SCENARIO INPUTS - assembled by hand from public squad news, as at 21 Nov 2026. THESE ARE GUESSES
+# SCENARIO INPUTS - assembled by hand from public squad news, as at 23 Nov 2026. THESE ARE GUESSES
 # about the 1 Jan 2027 powerplay personnel, not announced XIs. Names use Cricsheet's initials format;
 # a name with no BBL powerplay history (e.g. newcomers) silently gets a zero adjustment (= league
-# average), so check spellings against `data/balls.csv.gz` if you edit these.
+# average), so the unmatched names are printed below: check them against `data/balls.csv.gz`.
 #   Renegades: Bairstow, Bracewell, Mustafizur signed as overseas players; Seifert and O'Neill left
-#              for the Sixers; Zampa left for the Hurricanes.
-#   Sixers:    Seifert and O'Neill signed; Steve Smith reported unavailable for all of BBL|16 (single
-#              source - hence `with_smith` is a sensitivity only and excluded from the average);
-#              2025/26 openers Babar and Hughes and Henriques are not in any squad list found.
+#              for the Sixers; Zampa left for the Hurricanes; Behrendorff is out for the season (injury).
+#   Sixers:    Seifert, O'Neill, Jordan and Rocchiccioli signed; Babar, Murphy and Henriques gone;
+#              Hughes not confirmed.
+#   Excluded:  Steve Smith. He is unavailable because the match falls between the Boxing Day Test
+#              (26-30 Dec) and the New Year Test (4-8 Jan) against New Zealand. No other player is
+#              excluded as a Test player (the Australia Test squad had not been named at the time).
 # Update these from the official team announcements on match day.
 # ----------------------------------------------------------------------------------------------
-REN_B = dict(
+REN_B = dict(  # Renegades powerplay batters
     core=["J Brown", "J Fraser-McGurk"],
     plus_bairstow=["J Brown", "J Fraser-McGurk", "JM Bairstow"],
     plus_jewell=["J Brown", "J Fraser-McGurk", "CP Jewell"],
 )
-SIX_B = dict(
+SIX_B = dict(  # Sixers powerplay batters
     philippe_seifert=["JR Philippe", "TL Seifert"],
-    plus_davies=["JR Philippe", "TL Seifert", "JA Davies"],
-    with_smith=["JR Philippe", "TL Seifert", "SPD Smith"],
+    plus_davies=["JR Philippe", "TL Seifert", "O Davies"],
+    plus_silk=["JR Philippe", "TL Seifert", "JC Silk"],
 )
-REN_W = dict(
-    behr_suth_dogg=["JP Behrendorff", "W Sutherland", "B Doggett"],
-    with_mustafizur=["JP Behrendorff", "W Sutherland", "Mustafizur Rahman"],
+REN_W = dict(  # Renegades powerplay bowlers (what the Sixers face)
+    suth_dogg_rogers=["W Sutherland", "B Doggett", "TS Rogers"],
+    with_mustafizur=["TS Rogers", "B Doggett", "Mustafizur Rahman"],
 )
-SIX_W = dict(
-    abbott_edw_dwar=["SA Abbott", "J Edwards", "BJ Dwarshuis"],
-    with_oneill=["SA Abbott", "J Edwards", "F O'Neill"],
+SIX_W = dict(  # Sixers powerplay bowlers (what the Renegades face)
+    abbott_dwar_edwards=["SA Abbott", "BJ Dwarshuis", "J Edwards"],
+    with_oneill=["SA Abbott", "BJ Dwarshuis", "F O'Neill"],
+    with_jordan=["SA Abbott", "CJ Jordan", "BJ Dwarshuis"],
+)
+_names = {n for v in {**REN_B, **SIX_B, **REN_W, **SIX_W}.values() for n in v}
+print(
+    "No BBL powerplay history (get a neutral rating):",
+    sorted(n for n in _names if n not in bat.index and n not in bow.index),
 )
 print("\nBatter ratings:")
 print(show(bat, sorted({n for v in {**REN_B, **SIX_B}.values() for n in v})).to_string(index=False))
@@ -143,10 +151,9 @@ for team, key, BS, WS_opp in [
                 f"  {team:20s} bat={bn:17s} opp bowl={wn:16s} adj x{adj:.3f} -> mean {mu:.1f} median {med} [5%:{p5}, 95%:{p95}]"
             )
 mus = {
-    t: np.mean([v for k, v in res.items() if k[0] == t and k[1] != "with_smith"])
-    for t in ["Renegades bat first", "Sixers bat first"]
-}  # Smith reported unavailable all BBL|16 (single source) -> sensitivity only
-print("\nAverage over scenarios (excluding Smith):", {k: round(v, 1) for k, v in mus.items()})
+    t: np.mean([v for k, v in res.items() if k[0] == t]) for t in ["Renegades bat first", "Sixers bat first"]
+}
+print("\nAverage over scenarios (Smith excluded):", {k: round(v, 1) for k, v in mus.items()})
 pd.DataFrame({"runs": grid, **{t.replace(" ", "_"): pmf(mu) for t, mu in mus.items()}}).to_csv(
     RESULTS_DIR / "pp_pmf_squad_adjusted_full.csv", index=False
 )

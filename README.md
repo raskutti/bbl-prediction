@@ -13,22 +13,22 @@ side batting first. Reproduce everything with `make install && make data && make
 | | Prediction | Basis |
 |---|---|---|
 | **P(Renegades win)** | **0.43** (range 0.38 to 0.50) | Model output 0.41, nudged up for roster churn (a judgement call, not backtested). The range runs from the bootstrap lower bound to the 50%-shrink case. |
-| Renegades powerplay (bat first) | mean 44.3, sd 11.3, median 44, 90% range 27 to 64 | Squad-adjusted model |
-| Sixers powerplay (bat first) | mean 45.1, sd 11.5, median 44, 90% range 28 to 65 | Squad-adjusted model |
+| Renegades powerplay (bat first) | mean 44.6, sd 11.4, median 44, 90% range 27 to 65 | Squad-adjusted model |
+| Sixers powerplay (bat first) | mean 44.9, sd 11.5, median 44, 90% range 28 to 65 | Squad-adjusted model |
 
 Full distributions (0 to 160 runs): [`results/pp_pmf_squad_adjusted_full.csv`](results/pp_pmf_squad_adjusted_full.csv).
 
 **Assumptions.** No rain reduction or abandonment. The Renegades are the home side (the MCG is their new
 home ground for BBL|16); as a neutral match the win probability would be 0.35. The data ends in January 2026,
-so no 2026/27 games are in the model. Powerplay line-ups are scenarios, not announced XIs, and Steve Smith is
-assumed unavailable (one source; with him the Sixers' mean is about 47 to 48). The toss changes the pre-toss
+so no 2026/27 games are in the model. Powerplay line-ups are scenarios, not announced XIs. Steve Smith is
+excluded: the match falls between the Boxing Day and New Year Tests against New Zealand. No other player is excluded as a Test player (the Test squad was not yet named). The toss changes the pre-toss
 win probability by under 0.5 points.
 
 ## Methodology
 
 **Data.** Cricsheet ball-by-ball men's BBL, 2011/12 to 2025/26: 662 matches, of which 615 are completed
 full-length games (no-results and rain-reduced games are dropped). For the powerplay, 1,248 innings (short and
-rain-affected innings dropped). Public squad news (21 Nov 2026) is used only for the scenarios below.
+rain-affected innings dropped). Public squad news (23 Nov 2026) is used only for the scenarios below.
 
 **1. Win probability** (`match_model.py`, `match_predict.py`)
 
@@ -44,7 +44,7 @@ rain-affected innings dropped). Public squad news (21 Nov 2026) is used only for
 - *Mean.* log mu = intercept + second-innings effect + venue effect (ridge-shrunk, 14 venues), plus optional batting-team and bowling-team effects. Observations are time-decayed; fitting is by L-BFGS with analytic gradients.
 - *Team-level answer.* An equal mixture of an all-history fit and a one-year half-life fit (hedging uncertainty in the league scoring level): means 42.7 (Renegades) and 41.6 (Sixers).
 - *Player layer (primary answer).* Each batter and bowler gets an empirical-Bayes rating from earlier seasons: (runs + 60 x league rate) / (balls + 60) per legal ball in overs 1 to 6. The line-up's average rating, in runs per over versus the league, enters as a covariate: log mu = log mu(venue, innings) + b_bat x f_bat + b_bowl x f_bowl, with b fitted by ridge on the out-of-sample backtest rows (leave-one-season-out when evaluating). Players with no BBL history get a neutral rating.
-- *Scenarios.* The forecast averages plausible opening pairs and powerplay bowling attacks for each side (`player_scenarios.py`, with sources), excluding Smith.
+- *Scenarios.* The forecast averages plausible opening pairs and powerplay bowling attacks for each side (`player_scenarios.py`, with sources), with Smith excluded.
 
 **3. Evaluation protocol.** Rolling origin, 2016/17 to 2025/26: for each test season, hyperparameters and models use only earlier seasons (pool from 2013/14). Match results are scored by log loss and Brier score against a coin flip; powerplay distributions by mean log score, PIT calibration and interval coverage. Intervals are bootstrap 95% over matches or innings.
 
@@ -101,4 +101,4 @@ Each stage imports the stage it builds on and silently re-runs its backtest, so 
 `make eda | match | powerplay | players` runs individual stages; `make test` runs the tests.
 
 Data: [Cricsheet](https://cricsheet.org) (check its terms before redistributing). Squad news is as at
-21 November 2026 and will have changed by match day.
+23 November 2026 and will have changed by match day.
